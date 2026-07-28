@@ -1,11 +1,16 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
        
-         prev,maximum = 0,0
-         for num in nums:
-            temp=max(maximum,prev+num)
-            prev,maximum=maximum,temp
-        
-         return maximum
+        memo = {}
+
+        def f(i):
+            if i < 0:
+                return 0
+            if i in memo:
+                return memo[i]
+            memo[i]=max(f(i-1),nums[i]+f(i-2))
+            return memo[i]
+
+        return f(len(nums)-1)
 
 
