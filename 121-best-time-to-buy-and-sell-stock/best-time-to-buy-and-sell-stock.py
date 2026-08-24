@@ -1,10 +1,14 @@
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        minprice=float('inf')
-        profit=0
-        for price in prices:
-            if price<minprice:
-                minprice=price
-            elif price-minprice>profit:
-                profit=price-minprice
-        return profit
+        n = len(prices)
+        if n == 0:
+            return 0
+        hold = [0] * n
+        notHold = [0] * n
+        hold[0] = -prices[0]
+        notHold[0] = 0
+        for i in range(1, n):
+            hold[i] = max(hold[i-1], -prices[i])
+            notHold[i] = max(notHold[i-1], hold[i-1] + prices[i])
+        
+        return notHold[-1]
