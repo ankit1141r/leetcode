@@ -1,17 +1,23 @@
-class Solution(object):
-    def findMaxLength(self, nums):
-        count = 0
-        max_length=0
-        table = {0: 0}
-        for index, num in enumerate(nums, 1):
+class Solution:
+    def findMaxLength(self, nums: List[int]) -> int:
+        res = 0
+        m = {}
+
+        curr = 0
+
+        for i in range(len(nums)):
+            num = nums[i]
             if num == 0:
-                count -= 1
+                curr -= 1
             else:
-                count += 1
+                curr += 1
             
-            if count in table:
-                max_length = max(max_length, index - table[count])
+            if curr == 0:
+                res = i + 1
             else:
-                table[count] = index
-        
-        return max_length
+                if curr in m:
+                    if i - m[curr] > res:
+                        res = i - m[curr]
+                else:
+                    m[curr] = i
+        return res
