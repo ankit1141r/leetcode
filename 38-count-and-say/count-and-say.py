@@ -13,4 +13,3 @@ class Solution:
                 i+=1
             s=string
         return s
-
