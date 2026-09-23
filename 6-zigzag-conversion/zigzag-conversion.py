@@ -8,8 +8,6 @@ class Solution(object):
         for ch in s:
             matrix[currRow] += ch
             if currRow == 0 or currRow== numRows-1:
-                dir*=-1
-            
-            currRow +=dir
-        
+                dir*=-1      
+            currRow +=dir    
         return "".join(matrix)
