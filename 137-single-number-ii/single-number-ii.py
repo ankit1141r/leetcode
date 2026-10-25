@@ -1,9 +1,8 @@
 class Solution:
     def singleNumber(self, nums: list[int]) -> int:
-        if len(nums)<3:
-            return nums[0]
+        
         nums=sorted(nums)
-        if nums[0]!=nums[1] :
+        if len(nums)<3 or nums[0]!=nums[1] :
             return nums[0]
         elif nums[len(nums)-1]!=nums[len(nums)-2]:
             return nums[len(nums)-1]
