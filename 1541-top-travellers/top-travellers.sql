@@ -1,10 +1,13 @@
-with distancetravel as(
-    select user_id,sum(distance) as travelled_distance
-    from Rides
-    group by user_id
-)
-select u.name,COALESCE(d.travelled_distance, 0) AS travelled_distance
-from users u
-left join distancetravel d
-on u.id=d.user_id
-order by travelled_distance desc,u.name;
+SELECT 
+    u.name,
+    IFNULL(SUM(r.distance), 0) AS travelled_distance
+FROM 
+    Users u
+LEFT JOIN 
+    Rides r ON u.id = r.user_id
+GROUP BY 
+    u.id, 
+    u.name
+ORDER BY 
+    travelled_distance DESC, 
+    u.name ASC;
